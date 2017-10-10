@@ -121,6 +121,10 @@ class Ratelimit
     ((time % @bucket_span) / @bucket_interval).floor
   end
 
+  def redis
+    @redis ||= Redis::Namespace.new(:ratelimit, redis: @raw_redis || Redis.new)
+  end
+  
   def use_redis
     if @checkout_redis_with
       @checkout_redis_with.call { |redis| yield(namespaced_redis_instance(redis)) }
