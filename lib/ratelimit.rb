@@ -79,7 +79,7 @@ class Ratelimit
   # @option options [Integer] :interval How far back to retrieve activity.
   # @option options [Integer] :threshold Maximum number of actions
   def exceeded?(subject, options = {})
-    return count(subject, options[:interval]) >= options[:threshold]
+    return count(subject, options[:interval]) > options[:threshold]
   end
 
   # Check if the rate limit is within bounds
